@@ -1,0 +1,25 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const docs = await getCollection("docs");
+  return docs.map((doc) => ({
+    params: { slug: doc.slug },
+    props: { doc },
+  }));
+}
+
+interface Props {
+  doc: CollectionEntry<"docs">;
+}
+
+const { doc } = Astro.props;
+const { Content } = await doc.render();
+---
+
+<Layout>
+  <article class="prose prose-2xl dark:prose-invert max-w-none p-5">
+    <Content />
+  </article>
+</Layout>

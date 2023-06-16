@@ -1,5 +1,5 @@
 ---
-import Navbar from "../components/header/Navbar.astro";
+import Navbar from "../components/navbar/Navbar.astro";
 import LeftSidebar from "../components/leftSidebar/LeftSidebar.astro";
 ---
 
@@ -12,7 +12,8 @@ import LeftSidebar from "../components/leftSidebar/LeftSidebar.astro";
   </head>
   <body class="bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
     <Navbar />
-
-    <slot />
+    <slot>
+      <LeftSidebar currentPage="test" />
+    </slot>
   </body>
 </html>

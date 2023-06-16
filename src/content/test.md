@@ -1,7 +1,0 @@
-# olaaa
-
-Siuuuuuu
-
-## aespa
-
-jejeje

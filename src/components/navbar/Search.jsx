@@ -1,7 +1,7 @@
 import { DocSearch } from "@docsearch/react";
 import "@docsearch/css";
 
-function Search() {
+export default function Search() {
   return (
     <div>
       <DocSearch
@@ -13,5 +13,3 @@ function Search() {
     </div>
   );
 }
-
-export default Search;
