@@ -1,5 +1,5 @@
 ---
-import { sidebar } from "../../consts";
+import { docsSidebar } from "../../consts";
 
 interface Props {
   currentPage: string;
@@ -14,7 +14,7 @@ const currentPageMatch = currentPage.endsWith("/")
 <nav aria-labelledby="grid-left">
   <ul class="nav-groups">
     {
-      Object.entries(sidebar).map(([header, children]) => (
+      Object.entries(docsSidebar).map(([header, children]) => (
         <li>
           <div class="nav-group">
             <h2 class="nav-group-title">{header}</h2>
