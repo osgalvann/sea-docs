@@ -1,7 +1,9 @@
 ---
 import { CollectionEntry, getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import LeftSidebar from "../../components/leftSidebar/LeftSidebar.astro";
 
+const currentPage = Astro.url.pathname;
 export async function getStaticPaths() {
   const docs = await getCollection("docs");
   return docs.map((doc) => ({
@@ -19,7 +21,12 @@ const { Content } = await doc.render();
 ---
 
 <Layout>
-  <article class="prose prose-2xl dark:prose-invert max-w-none p-5">
-    <Content />
-  </article>
+  <div class="flex flex-row pt-5 pb-5">
+    <aside>
+      <LeftSidebar currentPage={currentPage} collection="docs" />
+    </aside>
+    <article class="prose prose-xl dark:prose-invert max-w-4xl pl-5">
+      <Content />
+    </article>
+  </div>
 </Layout>
