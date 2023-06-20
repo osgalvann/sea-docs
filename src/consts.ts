@@ -1,5 +1,8 @@
 export const docsSidebar = {
-  Introduction: [{ text: "What is SE Advantage?", link: "intro" }],
+  Introduction: [
+    { text: "What is SE Advantage?", link: "intro" },
+    { text: "Functionalities per Track", link: "functionalites-per-track" },
+  ],
   "bFO <-> SEA Integration": [
     { text: "Introduction", link: "test" },
     { text: "te", link: "test-2" },

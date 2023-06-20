@@ -14,31 +14,37 @@ const currentPageMatch = currentPage.endsWith("/")
 
 <nav
   id="navGroups"
-  class="sticky top-24 overflow-y-scroll overscroll-contain h-[calc(100vh-5.75rem)] text-xl pl-4 pr-3 scrollbar"
+  class="fixed top-8rem overflow-y-scroll overscroll-contain h-[calc(100vh-5.75rem)] text-l pl-4 pr-3 w-1/6 scrollbar"
 >
   <ul>
     {
       Object.entries(docsSidebar).map(([header, children]) => (
         <li class="mb-3">
           <div>
-            <h2 class="font-bold">{header}</h2>
-            <ul>
-              {children.map((child) => {
-                const url = child.link;
-                return (
-                  <li class="ml-2">
-                    <a
-                      href={url}
-                      aria-current={
-                        currentPageMatch === child.link ? "page" : false
-                      }
-                    >
-                      {child.text}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
+            <div class="accordion-header flex items-center justify-between active">
+              <h2 class="font-bold">{header}</h2>
+              <i class="bx bx-chevron-down" />
+            </div>
+            <div class="accordion-body">
+              <ul>
+                {children.map((child) => {
+                  const url = child.link;
+                  return (
+                    <li class="pl-2 hover:bg-zinc-200 hover:cursor-pointer dark:hover:bg-zinc-700 rounded-xl">
+                      <a
+                        class="w-full"
+                        href={url}
+                        aria-current={
+                          currentPageMatch === child.link ? "page" : false
+                        }
+                      >
+                        {child.text}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </li>
       ))
@@ -47,20 +53,45 @@ const currentPageMatch = currentPage.endsWith("/")
 </nav>
 
 <script>
-  let url = location.href;
-  let current = url.substring(url.lastIndexOf("/") + 1);
-  let currentAnchor = document.querySelector(`[href=${current}]`);
-  let sectionTitle = document.querySelector(
-    `div:has([href='${current}']) > h2`
+  const url = location.href;
+  const accordionHeader = document.querySelectorAll(".accordion-header");
+  const current = url.substring(url.lastIndexOf("/") + 1);
+  const currentAnchor = document.querySelector(`[href=${current}]`);
+  const sectionTitle = document.querySelector(
+    `div:has([href='${current}']) > div > h2`
   );
   sectionTitle?.classList.add("text-lime-600");
   currentAnchor?.classList.add("text-lime-600");
+
+  accordionHeader.forEach((accordionHeader) => {
+    accordionHeader.addEventListener("click", (event) => {
+      accordionHeader.classList.toggle("active");
+      const accordionBody = accordionHeader.nextElementSibling as HTMLElement;
+      if (accordionHeader.classList.contains("active")) {
+        accordionBody.style.maxHeight = accordionBody?.scrollHeight + "px";
+      } else {
+        accordionBody.style.maxHeight = "0px";
+      }
+    });
+  });
+
+  function clickItsAnchor() {
+    const liEl = document.querySelectorAll("div.accordion-body li");
+    liEl.forEach((li) => {
+      li.addEventListener("click", (event) => {
+        li.querySelector("a")?.click();
+      });
+    });
+  }
+
+  clickItsAnchor();
 </script>
 
 <script is:inline>
   {
     const leftSidebar = document.querySelector("#navGroups");
     const leftSidebarScroll = localStorage.getItem("sidebar-scroll");
+    //const accordionHeader = document.querySelectorAll(".accordion-header");
     if (leftSidebarScroll !== null) {
       leftSidebar.scrollTop = parseInt(leftSidebarScroll, 10);
     }
@@ -83,17 +114,31 @@ const currentPageMatch = currentPage.endsWith("/")
 
     .scrollbar::-webkit-scrollbar-track {
       border-radius: 100vh;
-      background: #f7f4ed;
+      background: transparent;
     }
 
     .scrollbar::-webkit-scrollbar-thumb {
       background: #7a7a7a;
       border-radius: 100vh;
-      border: 0px solid #f7f4ed;
+      border: 0px solid #f4f4f5;
     }
 
     .scrollbar::-webkit-scrollbar-thumb:hover {
       background: #8a8a8a;
+    }
+  }
+
+  @layer components {
+    .accordion-header {
+      @apply cursor-pointer;
+    }
+
+    .accordion-header.active i {
+      @apply transition ease-in-out duration-300;
+      transform: rotateX(180deg);
+    }
+    .accordion-body {
+      @apply overflow-hidden transition-all duration-200 ease-out;
     }
   }
 </style>
