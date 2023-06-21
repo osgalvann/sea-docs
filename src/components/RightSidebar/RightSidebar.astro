@@ -1,0 +1,11 @@
+---
+const { content, githubEditUrl, headings } = Astro.props;
+const overview = "rightSidebar.overview";
+import TableOfContents from "./TableOfContents";
+---
+
+<div
+  class="fixed top-8rem overscroll-contain h-[calc(100vh-5.75rem)] text-l pl-4 pr-3 w-1/6 scrollbar"
+>
+  <TableOfContents client:visible />
+</div>

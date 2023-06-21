@@ -1,0 +1,27 @@
+.table-of-contents {
+    margin-left: 0.5rem;
+}
+
+.table-of-contents h2 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+
+.toc-list {
+    list-style-type: none;
+}
+
+.toc-list li {
+    margin-bottom: 5px;
+    margin-left: 0.5rem;
+}
+
+.toc-list a {
+    text-decoration: none;
+}
+
+.toc-list a:hover {
+    color: rgb(132 204 22)
+}

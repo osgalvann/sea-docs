@@ -2,6 +2,8 @@
 import { CollectionEntry, getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import LeftSidebar from "../../components/leftSidebar/LeftSidebar.astro";
+import RightSidebar from "../../components/RightSidebar/RightSidebar.astro";
+import type { MarkdownHeading } from "astro";
 
 const currentPage = Astro.url.pathname;
 export async function getStaticPaths() {
@@ -14,6 +16,7 @@ export async function getStaticPaths() {
 
 interface Props {
   doc: CollectionEntry<"docs">;
+  headings: MarkdownHeading[];
 }
 
 const { doc } = Astro.props;
@@ -21,12 +24,17 @@ const { Content } = await doc.render();
 ---
 
 <Layout>
-  <div class="flex flex-row pt-5 pb-5">
+  <div class="flex pt-5 pb-5">
     <aside class="w-1/6 z-3">
       <LeftSidebar currentPage={currentPage} collection="docs" />
     </aside>
-    <article class="prose prose-xl dark:prose-invert max-w-4xl pl-5">
+    <article
+      class="flex-1 prose prose-xl dark:prose-invert max-w-screen-lg pl-3"
+    >
       <Content />
     </article>
+    <aside class="w-1/6">
+      <RightSidebar />
+    </aside>
   </div>
 </Layout>

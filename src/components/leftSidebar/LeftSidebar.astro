@@ -55,7 +55,10 @@ const currentPageMatch = currentPage.endsWith("/")
 <script>
   const url = location.href;
   const accordionHeader = document.querySelectorAll(".accordion-header");
-  const current = url.substring(url.lastIndexOf("/") + 1);
+  let current = url.substring(url.lastIndexOf("/") + 1);
+  if (current.indexOf("#") > 0) {
+    current = current.slice(0, current.indexOf("#"));
+  }
   const currentAnchor = document.querySelector(`[href=${current}]`);
   const sectionTitle = document.querySelector(
     `div:has([href='${current}']) > div > h2`
@@ -91,7 +94,6 @@ const currentPageMatch = currentPage.endsWith("/")
   {
     const leftSidebar = document.querySelector("#navGroups");
     const leftSidebarScroll = localStorage.getItem("sidebar-scroll");
-    //const accordionHeader = document.querySelectorAll(".accordion-header");
     if (leftSidebarScroll !== null) {
       leftSidebar.scrollTop = parseInt(leftSidebarScroll, 10);
     }
