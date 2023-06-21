@@ -1,16 +1,32 @@
 export const docsSidebar = {
   Introduction: [
-    { text: "What is SE Advantage?", link: "intro" },
+    { text: "What is SE Advantage?", link: "introduction" },
     { text: "Functionalities per Track", link: "functionalites-per-track" },
   ],
-  "bFO <-> SEA Integration": [
-    { text: "Introduction", link: "test" },
-    { text: "te", link: "test-2" },
-    { text: "Page 3", link: "en/page-3" },
+
+  "bFO Integration": [
+    {
+      text: "Keypoints",
+      link: "bfo-sea-keypoints",
+    },
+    {
+      text: "Oppotunities and Proposals",
+      link: "bfo-sea-opportunities-proposals",
+    },
+    {
+      text: "Quotes, Quote Link and Opportunity Lines",
+      link: "bfo-sea-quotes-oppty-lines",
+    },
+    {
+      text: "Value Chain Players",
+      link: "bfo-sea-vcp",
+    },
   ],
-  End: [
-    { text: "End 1", link: "end1" },
-    { text: "End 2", link: "end2" },
-    { text: "End 3", link: "end3" },
+
+  Acounts: [
+    {
+      text: "Account Management",
+      link: "accounts",
+    },
   ],
 };
